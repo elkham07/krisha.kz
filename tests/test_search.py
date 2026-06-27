@@ -1,3 +1,4 @@
+import re
 from playwright.sync_api import Page, expect , BrowserContext
 
 def test_search(page: Page):
@@ -40,5 +41,29 @@ def test_new_developments(page: Page, context: BrowserContext):
 
         new_tab = new_tab_event.value
         new_tab.wait_for_load_state()
+
+
+    page.get_by_role("link").nth(5).click()
+
+
+def test_sort(page: Page):
+    page.goto('https://krisha.kz/', wait_until='domcontentloaded')
+    page.get_by_role('button', name="Найти").click()
+    page.get_by_role('link', name="Новые").click()
+    page.wait_for_timeout(500)
+    page.get_by_role('link', name="Дешевые").click()
+    page.wait_for_timeout(500)
+    page.get_by_role('link', name="Дорогие").click()
+
+
+def test_switching(page: Page):
+    page.goto('https://krisha.kz/', wait_until='domcontentloaded')
+    page.get_by_role('button', name="Найти").click()
+    page.goto("https://krisha.kz/")
+    page.get_by_role("button", name="Найти").click()
+    page.get_by_role("link", name=" На карте").click()
+
+        
+    
 
 
