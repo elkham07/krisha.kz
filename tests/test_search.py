@@ -74,3 +74,10 @@ def test_news(page: Page):
     page.get_by_role("button", name="Астана").click()
 
 
+def test_news2(page: Page):
+    page.goto('https://krisha.kz/', wait_until='domcontentloaded')
+    page.get_by_role("banner").get_by_role("link", name="Новости").click()
+    page.get_by_test_id("articles").click()
+    page.get_by_role("link", name="Аналитика").click()
+    page.locator(".article-row").first.click()
+
