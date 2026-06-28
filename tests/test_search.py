@@ -14,7 +14,7 @@ def test_search(page: Page):
     page.wait_for_timeout(1000)
 
     page.mouse.wheel(0, 500)
-    page.locator('text="Избранное"').first.click()
+    page.locator('text="Избранное"').first.click(force=True)
     page.wait_for_timeout(1000)
     
 
@@ -49,7 +49,7 @@ def test_new_developments(page: Page, context: BrowserContext):
 def test_sort(page: Page):
     page.goto('https://krisha.kz/', wait_until='domcontentloaded')
     page.get_by_role('button', name="Найти").click()
-    page.get_by_role('link', name="Новые").click()
+    page.get_by_role('link', name="Новые").click(force=True)
     page.wait_for_timeout(500)
     page.get_by_role('link', name="Дешевые").click()
     page.wait_for_timeout(500)
@@ -61,9 +61,16 @@ def test_switching(page: Page):
     page.get_by_role('button', name="Найти").click()
     page.goto("https://krisha.kz/")
     page.get_by_role("button", name="Найти").click()
-    page.get_by_role("link", name=" На карте").click()
+    page.get_by_role("link", name=" На карте").click(force=True)
 
         
     
+
+def test_news(page: Page):
+    page.goto('https://krisha.kz/', wait_until='domcontentloaded')
+    page.get_by_role("banner").get_by_role("link", name="Новости").click()
+    page.get_by_role("complementary").get_by_role("link", name="Индекс Крыши").click()
+    page.get_by_role("button", name="Алматы ").click()
+    page.get_by_role("button", name="Астана").click()
 
 
